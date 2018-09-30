@@ -21,61 +21,64 @@ namespace PluralsightDemo.Controllers
             this.userManager = userManager;
             this.claimsPrincipalFactory = claimsPrincipalFactory;
         }
-        
+
 
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        //[HttpGet]
-        //public IActionResult Register()
-        //{
-        //    return View();
-        //}
+        [HttpGet]
+        [Authorize(Roles ="Administrator")]
+        public IActionResult Register()
+        {
+            return View();
+        }
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Register(RegisterModel model)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        var user = await userManager.FindByNameAsync(model.UserName);
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Register(RegisterModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await userManager.FindByNameAsync(model.UserName);
 
-        //        if (user == null)
-        //        {
-        //            user = new PluralsightUser
-        //            {
-        //                Id = Guid.NewGuid().ToString(),
-        //                UserName = model.UserName,
-        //                Email = model.UserName
-        //            };
+                if (user == null)
+                {
+                    user = new PluralsightUser
+                    {
+                        Id = Guid.NewGuid().ToString(),
+                        UserName = model.UserName,
+                        Email = model.UserName
+                    };
 
-        //            var result = await userManager.CreateAsync(user, model.Password);
+                    var result = await userManager.CreateAsync(user, model.Password);
 
-        //            if (result.Succeeded)
-        //            {
-        //                var token = await userManager.GenerateEmailConfirmationTokenAsync(user);
-        //                var confirmationEmail = Url.Action("ConfirmEmailAddress", "Home",
-        //                    new {token = token, email = user.Email}, Request.Scheme);
-        //                System.IO.File.WriteAllText("confirmationLink.txt", confirmationEmail);
-        //            }
-        //            else
-        //            {
-        //                foreach (var error in result.Errors)
-        //                {
-        //                    ModelState.AddModelError("", error.Description);
-        //                }
+                    //if (result.Succeeded)
+                    //{
+                    //    var token = await userManager.GenerateEmailConfirmationTokenAsync(user);
+                    //    var confirmationEmail = Url.Action("ConfirmEmailAddress", "Home",
+                    //        new { token = token, email = user.Email }, Request.Scheme);
+                    //    System.IO.File.WriteAllText("confirmationLink.txt", confirmationEmail);
+                    //}
+                    //else
 
-        //                return View();
-        //            }
-        //        }
+                    if(!result.Succeeded)
+                    {
+                        foreach (var error in result.Errors)
+                        {
+                            ModelState.AddModelError("", error.Description);
+                        }
 
-        //        return View("Success");
-        //    }
+                        return View();
+                    }
+                }
 
-        //    return View();
-        //}
+                return View("Success");
+            }
+
+            return View();
+        }
 
         ////[HttpGet]
         ////public async Task<IActionResult> ConfirmEmailAddress(string token, string email)
@@ -101,7 +104,7 @@ namespace PluralsightDemo.Controllers
             return View();
         }
 
-        
+
 
 
         [HttpPost]
@@ -110,7 +113,7 @@ namespace PluralsightDemo.Controllers
         {
             if (ModelState.IsValid)
             {
-                
+
                 var user = await userManager.FindByNameAsync(model.UserName);
 
                 if (user != null && await userManager.CheckPasswordAsync(user, model.Password))
@@ -126,14 +129,14 @@ namespace PluralsightDemo.Controllers
                     await HttpContext.SignInAsync("Identity.Application", principal);
 
                     //inlog logic
-                    var isAdmin = await userManager.IsInRoleAsync(user,Constants.AdministratorRole);
+                    var isAdmin = await userManager.IsInRoleAsync(user, Constants.AdministratorRole);
 
                     if (isAdmin) {
 
                         return RedirectToAction("Admin");
                         //sdfdsfsdfsdf
                     }
-                
+
                     return RedirectToAction("Leerling");
 
 
@@ -144,6 +147,31 @@ namespace PluralsightDemo.Controllers
 
             return View();
         }
+
+        [HttpGet]
+        [Authorize]
+        public IActionResult Admin()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult Leerling()
+        {
+            return View();
+        }
+
+
+
+        
+
+
+
+
+
+
+
+
 
 
 

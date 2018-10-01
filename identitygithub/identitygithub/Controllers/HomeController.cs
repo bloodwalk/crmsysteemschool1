@@ -14,12 +14,15 @@ namespace PluralsightDemo.Controllers
     {
         private readonly UserManager<PluralsightUser> userManager;
         private readonly IUserClaimsPrincipalFactory<PluralsightUser> claimsPrincipalFactory;
+        
 
         public HomeController(UserManager<PluralsightUser> userManager,
-            IUserClaimsPrincipalFactory<PluralsightUser> claimsPrincipalFactory)
+            IUserClaimsPrincipalFactory<PluralsightUser> claimsPrincipalFactory
+            )
         {
             this.userManager = userManager;
             this.claimsPrincipalFactory = claimsPrincipalFactory;
+            
         }
 
 
@@ -29,9 +32,12 @@ namespace PluralsightDemo.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles ="Administrator")]
+        [Authorize(Roles = Constants.AdministratorRole)]
         public IActionResult Register()
         {
+
+            
+
             return View();
         }
 
@@ -124,15 +130,22 @@ namespace PluralsightDemo.Controllers
                     //    return View();
                     //}
 
+                    var isAdmin = await userManager.IsInRoleAsync(user, Constants.AdministratorRole);
                     var principal = await claimsPrincipalFactory.CreateAsync(user);
 
-                    await HttpContext.SignInAsync("Identity.Application", principal);
+                    if (!isAdmin)
+                    {
+                        await HttpContext.SignInAsync("Identity.Application", principal);
+                    }
 
                     //inlog logic
-                    var isAdmin = await userManager.IsInRoleAsync(user, Constants.AdministratorRole);
+                    
 
                     if (isAdmin) {
 
+                        principal.AddIdentity(new ClaimsIdentity(new[] { new Claim(ClaimTypes.Role, Constants.AdministratorRole), }));
+
+                        await HttpContext.SignInAsync("Identity.Application", principal);
                         return RedirectToAction("Admin");
                         //sdfdsfsdfsdf
                     }
@@ -149,9 +162,14 @@ namespace PluralsightDemo.Controllers
         }
 
         [HttpGet]
-        [Authorize]
+        [Authorize(Roles = Constants.AdministratorRole)]
         public IActionResult Admin()
         {
+            
+            //var z = User.IsInRole(Constants.AdministratorRole);
+           // var user = await userManager.FindByNameAsync("admin@todo.local");
+           // ViewData["info"] = userManager.GetRolesAsync();
+
             return View();
         }
 
@@ -163,7 +181,15 @@ namespace PluralsightDemo.Controllers
 
 
 
-        
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync("Identity.Application");
+            
+           
+            return RedirectToAction("Login", "Home");
+        }
 
 
 

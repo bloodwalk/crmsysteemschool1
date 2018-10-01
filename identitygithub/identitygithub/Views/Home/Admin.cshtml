@@ -1,8 +1,17 @@
 ﻿
 @{
     ViewData["Title"] = "Admin";
+   // Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>Admin</h2>
 
 sdfsdfsdfsdfsdfsdfsdfsdf
+
+
+@User.IsInRole(Constants.AdministratorRole);
+
+
+<input type="button" id="mybutton" value="Register" onclick="location.href='@Url.Action("Register", "Home")'" />
+
+<div id="test">test</div>

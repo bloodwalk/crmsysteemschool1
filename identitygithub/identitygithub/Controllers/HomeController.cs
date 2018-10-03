@@ -10,6 +10,7 @@ using PluralsightDemo.Models;
 
 namespace PluralsightDemo.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly UserManager<PluralsightUser> userManager;
@@ -105,6 +106,7 @@ namespace PluralsightDemo.Controllers
         ////}
 
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult Login()
         {
             return View();

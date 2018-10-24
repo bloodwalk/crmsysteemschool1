@@ -5,15 +5,23 @@ namespace PluralsightDemo
 {
     public class PluralsightUserDbContext : IdentityDbContext<PluralsightUser>
     {
+       // public DbSet<pendingstudent> UserLogt { get; set; }
         public PluralsightUserDbContext(DbContextOptions<PluralsightUserDbContext> options) : base(options)
         {
             
         }
-
+        //public DbSet<pendingobject> PendingTable { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
 
+            //builder.Entity<pendingobject>(pending => {
+
+            //    pending.ToTable("Pendingobjects");
+            //    pending.HasKey(x=>x.ID);
+            //});
+            //builder.Entity<pendingobject>(user => user.HasIndex(x => x.anothervairalbe).IsUnique(false));
+            //builder.Entity<pendingobject>(user => user.HasIndex(x => x.weerietsanders).IsUnique(false));
             //builder.Entity<PluralsightUser>(user => user.HasIndex(x => x.Locale).IsUnique(false));
 
             //builder.Entity<Organization>(org =>

@@ -15,7 +15,7 @@ namespace PluralsightDemo
         protected override async Task<ClaimsIdentity> GenerateClaimsAsync(PluralsightUser user)
         {
             var identity = await base.GenerateClaimsAsync(user);
-            identity.AddClaim(new Claim("locale", user.Locale));
+            //identity.AddClaim(new Claim("locale", user.Locale));
             return identity;
         }
     }

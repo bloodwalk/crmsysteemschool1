@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 
 namespace PluralsightDemo
 {
@@ -25,14 +26,18 @@ namespace PluralsightDemo
         {
             services.AddMvc();
 
-            
-               // @"Data Source=Server=(localdb)\\mssqllocaldb;database=PluralsightDemo.PluralsightUser;trusted_connection=yes;";
+
+
+            //services.AddDbContext<PluralsightUserDbContext>( // replace "YourDbContext" with the class name of your DbContext
+            //   options => options.UseMySql("Server=localhost;port=3306;Database=studentdatabase;User=root;Password=")); // replace with your Connection String
+
+            // @"Data Source=Server=(localdb)\\mssqllocaldb;database=PluralsightDemo.PluralsightUser;trusted_connection=yes;";
             //var migrationAssembly = typeof(Startup).GetTypeInfo().Assembly.GetName().Name;
             //services.AddDbContext<PluralsightUserDbContext>(opt => opt.UseSqlServer(connectionString,
             //    sql => sql.MigrationsAssembly(migrationAssembly)));
 
             services.AddDbContext<PluralsightUserDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlServer(Configuration.GetConnectionString("Defaultconnection")));
 
 
             services.AddIdentity<PluralsightUser, IdentityRole>(options =>

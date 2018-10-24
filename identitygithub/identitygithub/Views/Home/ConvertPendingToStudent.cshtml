@@ -1,0 +1,62 @@
+﻿@model List<PluralsightUser>
+@{
+    ViewData["Title"] = "ConvertPendingToStudent";
+}
+
+<h2>ConvertPendingToStudent</h2>
+
+<table id="studenttable">
+
+    <tr>
+        <th>Email</th>
+        <th>naam</th>
+        <th>postcode</th>
+        <th>woonplaats</th>
+        <th>adress</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+    <tr>
+        <td id="mytd">@item.Email </td>
+        <td id="mytd">@item.naam</td>
+        <td id="mytd">@item.postcode</td>
+        <td id="mytd">@item.woonplaats</td>
+        <td id="mytd">@item.adress</td>
+        <td>
+            <form asp-action="ConvertToStudent" method="post" class="form-horizontal">
+
+                <input type="hidden" id="UserName" name="UserName" value="@item.UserName">
+                <input type="submit" value="ContvertToStudent" class="ConvertButtons"
+                       onclick="location.href='@Url.Action("ConvertToStudent", "Home"/*,new {UserName=item.UserName }*/)'">
+            </form>
+
+
+
+        </td>
+
+        <td>
+            <form asp-action="RemovePendingStudent" method="post" class="form-horizontal">
+
+                <input type="hidden" id="UserName" name="UserName" value="@item.UserName">
+                <input type="submit" value="DeletePendingStudent" class="ConvertButtons"
+                       onclick="location.href='@Url.Action("RemovePendingStudent", "Home"/*,new {UserName=item.UserName }*/)'">
+            </form>
+
+
+
+        </td>
+
+
+
+
+
+    </tr>
+    }
+        
+        
+
+</table>   
+       
+
+

@@ -6,12 +6,7 @@
 
 <h2>Admin</h2>
 
-sdfsdfsdfsdfsdfsdfsdfsdf
 
-
-@User.IsInRole(Constants.AdministratorRole);
-
-
-<input type="button" id="mybutton" value="Register" onclick="location.href='@Url.Action("Register", "Home")'" />
-
-<div id="test">test</div>
+<input type="button" class="mybuttons" value="Register" onclick="location.href='@Url.Action("Register", "Home")'" />
+<input type="button" class="mybuttons" value="AddPending" onclick="location.href='@Url.Action("AddPending", "Home")'" />
+<input type="button" class="mybuttons" value="ConvertPendingToStudent" onclick="location.href='@Url.Action("ConvertPendingToStudent", "Home")'" />

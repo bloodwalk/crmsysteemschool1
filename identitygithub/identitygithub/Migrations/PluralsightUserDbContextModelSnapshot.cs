@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.Internal;
 using PluralsightDemo;
 using System;
 
-namespace PluralsightDemo.Migrations
+namespace identitygithub.Migrations
 {
     [DbContext(typeof(PluralsightUserDbContext))]
     partial class PluralsightUserDbContextModelSnapshot : ModelSnapshot
@@ -17,7 +17,7 @@ namespace PluralsightDemo.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.0.1-rtm-125")
+                .HasAnnotation("ProductVersion", "2.0.3-rtm-10026")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -128,18 +128,6 @@ namespace PluralsightDemo.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("PluralsightDemo.Organization", b =>
-                {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Name");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Organizations");
-                });
-
             modelBuilder.Entity("PluralsightDemo.PluralsightUser", b =>
                 {
                     b.Property<string>("Id")
@@ -155,7 +143,7 @@ namespace PluralsightDemo.Migrations
 
                     b.Property<bool>("EmailConfirmed");
 
-                    b.Property<string>("Locale");
+                    b.Property<bool>("IsPending");
 
                     b.Property<bool>("LockoutEnabled");
 
@@ -166,8 +154,6 @@ namespace PluralsightDemo.Migrations
 
                     b.Property<string>("NormalizedUserName")
                         .HasMaxLength(256);
-
-                    b.Property<string>("OrgId");
 
                     b.Property<string>("PasswordHash");
 
@@ -182,9 +168,15 @@ namespace PluralsightDemo.Migrations
                     b.Property<string>("UserName")
                         .HasMaxLength(256);
 
-                    b.HasKey("Id");
+                    b.Property<string>("adress");
 
-                    b.HasIndex("Locale");
+                    b.Property<string>("naam");
+
+                    b.Property<string>("postcode");
+
+                    b.Property<string>("woonplaats");
+
+                    b.HasKey("Id");
 
                     b.HasIndex("NormalizedEmail")
                         .HasName("EmailIndex");
@@ -193,8 +185,6 @@ namespace PluralsightDemo.Migrations
                         .IsUnique()
                         .HasName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
-
-                    b.HasIndex("OrgId");
 
                     b.ToTable("AspNetUsers");
                 });
@@ -242,13 +232,6 @@ namespace PluralsightDemo.Migrations
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("PluralsightDemo.PluralsightUser", b =>
-                {
-                    b.HasOne("PluralsightDemo.Organization")
-                        .WithMany()
-                        .HasForeignKey("OrgId");
                 });
 #pragma warning restore 612, 618
         }

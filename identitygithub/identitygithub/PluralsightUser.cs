@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace PluralsightDemo
@@ -12,6 +13,8 @@ namespace PluralsightDemo
         public string woonplaats { get; set; }
         public string naam { get; set; }
         public bool IsPending { get; set; }
+        // new data
+        public DateTime deadline { get; set; }
         // public string somenewvariable { get; set; } = "test";
       //  public DbSet<pendingobject2> UserLogt { get; set; }
 

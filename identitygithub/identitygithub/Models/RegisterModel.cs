@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace PluralsightDemo.Models
 {
@@ -25,6 +26,8 @@ namespace PluralsightDemo.Models
         [Required]
         [MaxLength(40, ErrorMessage = "naam cannot be longer than 40 characters.")]
         public string naam { get; set; }
+        [Required]
+        public DateTime deadline { get; set; }
 
         
     }

@@ -1,10 +1,64 @@
 ﻿body {
 }
+/*voor datetime css*/
+/*.ui-datepicker {
+    width: 216px;
+    height: auto;
+    margin: 5px auto 0;
+    font: 9pt Arial, sans-serif;
+    -webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, .5);
+    -moz-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, .5);
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, .5);
+}
+
+
+.ui-datepicker-header {   
+    color: red;
+    font-weight: bold;
+   
+}
+
+
+.ui-datepicker-title {
+    text-align: center;
+}
+
+.ui-datepicker-prev, .ui-datepicker-next {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    cursor: pointer;
+    background-color:red;
+    color:green;
+    line-height: 600%;
+    overflow: hidden;
+}
+
+
+
+
+/*voor datatime cs*/
+
+
+#notificationsheader {
+    background-color: black;
+    color:green;
+    font-weight: bold;
+    text-align: center;
+}
+.deadlineheader {
+
+    color:red;
+    font-weight:bold;
+}
+
+
 
 #studenttable {
     border-collapse: separate;
     border-spacing: 50px 0;
-    width:100%;
+    width: 100%;
 }
 #mytd {
     padding: 10px 0;

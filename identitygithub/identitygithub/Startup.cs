@@ -31,7 +31,7 @@ namespace PluralsightDemo
             //services.AddDbContext<PluralsightUserDbContext>( // replace "YourDbContext" with the class name of your DbContext
             //   options => options.UseMySql("Server=localhost;port=3306;Database=studentdatabase;User=root;Password=")); // replace with your Connection String
 
-            // @"Data Source=Server=(localdb)\\mssqllocaldb;database=PluralsightDemo.PluralsightUser;trusted_connection=yes;";
+            //var connectionString = @"Data Source= Server = (localdb)\\MSSQLLocalDB; Database = testdatabase4.test; Trusted_Connection = True; MultipleActiveResultSets = true";
             //var migrationAssembly = typeof(Startup).GetTypeInfo().Assembly.GetName().Name;
             //services.AddDbContext<PluralsightUserDbContext>(opt => opt.UseSqlServer(connectionString,
             //    sql => sql.MigrationsAssembly(migrationAssembly)));

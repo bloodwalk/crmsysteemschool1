@@ -66,6 +66,7 @@ namespace PluralsightDemo.Controllers
                         postcode = model.postcode,
                         naam = model.naam,
                         IsPending = false,
+                        deadline = model.deadline
                     };
 
                     var result = await userManager.CreateAsync(user, model.Password);
@@ -240,6 +241,7 @@ namespace PluralsightDemo.Controllers
                         postcode=model.postcode,
                         naam=model.naam,
                         IsPending = true,
+                        deadline = model.deadline
                     };
 
                     var result = await userManager.CreateAsync(user, model.Password);
@@ -355,7 +357,39 @@ namespace PluralsightDemo.Controllers
             return View("Success");
         }
 
+        [HttpGet]
+        [Authorize(Roles = Constants.AdministratorRole)]
+        public async Task<IActionResult> Notifications()
+        {
+           // PluralsightUser x = new PluralsightUser();
+            List<PluralsightUser> DeadlineUsers = _context.Users
+                .Where(x => x.deadline < DateTime.Now).ToList();
+            //var Lijst2 = DeadlineUsers;
+            
 
+            foreach (var student in DeadlineUsers.ToList()) {
+
+                var isAdmin = await userManager.IsInRoleAsync(student, Constants.AdministratorRole);
+
+                if (isAdmin) {
+                    // Lijst2.Remove(student);
+                    DeadlineUsers.Remove(student);
+                }
+            }
+                //.Where(x=> {
+
+                //    var isAdmin = userManager.IsInRoleAsync(x, Constants.AdministratorRole);
+                   
+                    
+                //    return Task.W;
+                    
+                //})
+                
+               
+          
+            
+            return View("Notifications", DeadlineUsers);
+        }
 
 
 

@@ -1,0 +1,33 @@
+﻿@model List<PluralsightUser>
+    @{
+        ViewData["Title"] = "Notifications";
+    }
+
+    <h2 id="notificationsheader">Notifications</h2>
+
+    <table id="studenttable">
+
+        <tr>
+            <th>Email</th>
+            <th>naam</th>
+            <th>postcode</th>
+            <th>woonplaats</th>
+            <th>adress</th>
+            <th class="deadlineheader">deadline</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td id="mytd">@item.Email </td>
+            <td id="mytd">@item.naam</td>
+            <td id="mytd">@item.postcode</td>
+            <td id="mytd">@item.woonplaats</td>
+            <td id="mytd">@item.adress</td>
+            <td id="mytd"class="deadlineheader">@item.deadline</td>
+        </tr>
+        }
+
+
+
+    </table>

@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Security.Claims;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
+using Microsoft.EntityFrameworkCore;// dit is nieuw
 using PluralsightDemo.Models;
 
 namespace PluralsightDemo.Controllers
@@ -28,7 +30,7 @@ namespace PluralsightDemo.Controllers
             this._context = databasecontext;
             this.userManager = userManager;
             this.claimsPrincipalFactory = claimsPrincipalFactory;
-            
+
         }
 
 
@@ -41,8 +43,8 @@ namespace PluralsightDemo.Controllers
         [Authorize(Roles = Constants.AdministratorRole)]
         public IActionResult Register()
         {
-            
-            
+
+
             return View();
         }
 
@@ -80,7 +82,7 @@ namespace PluralsightDemo.Controllers
                     //}
                     //else
 
-                    if(!result.Succeeded)
+                    if (!result.Succeeded)
                     {
                         foreach (var error in result.Errors)
                         {
@@ -119,8 +121,8 @@ namespace PluralsightDemo.Controllers
         [AllowAnonymous]
         public IActionResult Login()
         {
-           
-          // _context.UserLogt.Add() nu werkt het dus wel
+
+            // _context.UserLogt.Add() nu werkt het dus wel
             return View();
         }
 
@@ -134,7 +136,7 @@ namespace PluralsightDemo.Controllers
         {
             if (ModelState.IsValid)
             {
-                
+
 
                 var user = await userManager.FindByNameAsync(model.UserName);
 
@@ -155,7 +157,7 @@ namespace PluralsightDemo.Controllers
                     }
 
                     //inlog logic
-                    
+
 
                     if (isAdmin) {
 
@@ -181,10 +183,10 @@ namespace PluralsightDemo.Controllers
         [Authorize(Roles = Constants.AdministratorRole)]
         public IActionResult Admin()
         {
-            
+
             //var z = User.IsInRole(Constants.AdministratorRole);
-           // var user = await userManager.FindByNameAsync("admin@todo.local");
-           // ViewData["info"] = userManager.GetRolesAsync();
+            // var user = await userManager.FindByNameAsync("admin@todo.local");
+            // ViewData["info"] = userManager.GetRolesAsync();
 
             return View();
         }
@@ -202,8 +204,8 @@ namespace PluralsightDemo.Controllers
         public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync("Identity.Application");
-            
-           
+
+
             return RedirectToAction("Login", "Home");
         }
 
@@ -228,18 +230,18 @@ namespace PluralsightDemo.Controllers
             if (ModelState.IsValid)
             {
                 var user = await userManager.FindByNameAsync(model.UserName);
-                
+
                 if (user == null)
                 {
                     user = new PluralsightUser
                     {
                         Id = Guid.NewGuid().ToString(),
-                        UserName = model.UserName,                        
+                        UserName = model.UserName,
                         Email = model.UserName,
                         adress = model.adress,
-                        woonplaats=model.woonplaats,
-                        postcode=model.postcode,
-                        naam=model.naam,
+                        woonplaats = model.woonplaats,
+                        postcode = model.postcode,
+                        naam = model.naam,
                         IsPending = true,
                         deadline = model.deadline
                     };
@@ -270,7 +272,7 @@ namespace PluralsightDemo.Controllers
             }
 
             return View();
-            
+
         }
 
 
@@ -279,9 +281,9 @@ namespace PluralsightDemo.Controllers
         [Authorize(Roles = Constants.AdministratorRole)]
         public IActionResult ConvertPendingToStudent()
         {
-            List<PluralsightUser> PendingUsers = _context.Users.Where(x=>x.IsPending==true).ToList();
-         
-            return View("ConvertPendingToStudent",PendingUsers);
+            List<PluralsightUser> PendingUsers = _context.Users.Where(x => x.IsPending == true).ToList();
+
+            return View("ConvertPendingToStudent", PendingUsers);
         }
 
 
@@ -290,8 +292,8 @@ namespace PluralsightDemo.Controllers
         public async Task<IActionResult> ConvertToStudent(string UserName) {
 
 
-            
-            
+
+
             if (UserName == null) {
                 return RedirectToAction("ConvertPendingToStudent", "Home");// moet naar errorpage gaan
             }
@@ -301,7 +303,7 @@ namespace PluralsightDemo.Controllers
             if (user != null) {
                 user.IsPending = false;
                 // user.save                 //////////////// nieuwe code
-               var result = await userManager.UpdateAsync(user);
+                var result = await userManager.UpdateAsync(user);
 
 
                 if (!result.Succeeded)
@@ -328,7 +330,7 @@ namespace PluralsightDemo.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> RemovePendingStudent(string UserName) {
-         
+
             if (UserName == null) {
                 return RedirectToAction("ConvertPendingToStudent", "Home");// moet naar error page gaan
             }
@@ -336,8 +338,8 @@ namespace PluralsightDemo.Controllers
 
             var user = await userManager.FindByNameAsync(UserName);
             if (user != null) {
-                               
-               var result = await userManager.DeleteAsync(user);
+
+                var result = await userManager.DeleteAsync(user);
 
 
                 if (!result.Succeeded)
@@ -361,11 +363,11 @@ namespace PluralsightDemo.Controllers
         [Authorize(Roles = Constants.AdministratorRole)]
         public async Task<IActionResult> Notifications()
         {
-           // PluralsightUser x = new PluralsightUser();
+            // PluralsightUser x = new PluralsightUser();
             List<PluralsightUser> DeadlineUsers = _context.Users
                 .Where(x => x.deadline < DateTime.Now).ToList();
             //var Lijst2 = DeadlineUsers;
-            
+            // DeadlineUsers.Where(async(x) => await userManager.IsInRoleAsync(x, Constants.AdministratorRole));
 
             foreach (var student in DeadlineUsers.ToList()) {
 
@@ -376,23 +378,75 @@ namespace PluralsightDemo.Controllers
                     DeadlineUsers.Remove(student);
                 }
             }
-                //.Where(x=> {
+            //.Where(x=> {
 
-                //    var isAdmin = userManager.IsInRoleAsync(x, Constants.AdministratorRole);
-                   
-                    
-                //    return Task.W;
-                    
-                //})
-                
-               
-          
-            
+            //    var isAdmin = userManager.IsInRoleAsync(x, Constants.AdministratorRole);
+
+
+            //    return Task.W;
+
+            //})
+
+
+
+
             return View("Notifications", DeadlineUsers);
         }
 
 
 
+
+
+
+        [HttpGet]
+        [Authorize(Roles = Constants.AdministratorRole)]
+        public IActionResult Edit()
+        {
+
+
+            return View("Edit");
+        }
+
+
+        [HttpGet]
+        [Authorize(Roles = Constants.AdministratorRole)]        
+        public IActionResult GetEditData(string editsearch)
+        {
+            Thread.Sleep(3000);
+            //if (editsearch == "naam3") {
+            //    return new JsonResult("works");
+            //}
+           // var Edituser = await _context.Users.Where(student => student.naam == editsearch).FirstOrDefaultAsync();//.ToListAsync();
+
+
+            // var Edituser = await userManager.FindByNameAsync(editsearch);
+           // return new JsonResult("demo1");
+            return PartialView("_EditPartial");
+        }
+
+
+        //QuikSearch
+
+        [HttpGet]
+        [Authorize(Roles = Constants.AdministratorRole)]
+        public async Task<JsonResult> QuikSearchAsync(string term)
+        {
+           
+
+            var QuikSearchResults = await _context.Users.Where(student => student.naam.ToLower().StartsWith(term.ToLower()))
+               .Select(student => new { value = student.naam }).ToListAsync();
+
+            //var result = QuikSearchResults[0].value;
+            //string[] array = { "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat",result };
+
+            //string[] weekDays = { "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" , result};
+
+            return Json(QuikSearchResults);// JsonRequistBehavior.AllowGet);
+
+            // var Edituser = await userManager.FindByNameAsync(editsearch);
+            // return new JsonResult("demo1");
+            
+        }
 
 
         //[HttpGet]

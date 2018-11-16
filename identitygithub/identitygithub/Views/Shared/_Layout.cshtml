@@ -7,10 +7,11 @@
     <link href="~/css/stylepages.css" rel="stylesheet" />
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-        <link rel="stylesheet" href="~/css/site.css" />
+        <link rel="stylesheet" href="~/css/site.css" />        
         <link rel="stylesheet" href="~/lib/jquery-ui/themes/base/datepicker.css">
         <link href="~/lib/jquery-ui/themes/base/all.css" rel="stylesheet" />
-       
+
+
     </environment>
     <environment exclude="Development">
         <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -64,7 +65,12 @@
         <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
         <script src="~/js/site.js" asp-append-version="true"></script>
         <script src="~/js/Datetimer.js"></script>
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css"> @*//dit is nieuw*@
+        <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
         <script src="~/lib/jquery-ui/ui/widgets/datepicker.js"></script>
+        <script src="~/lib/jquery.unobtrusive-ajax/src/jquery.unobtrusive-ajax.js"></script>
+
     </environment>
     <environment exclude="Development">
         <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"

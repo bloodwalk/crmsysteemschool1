@@ -54,10 +54,15 @@
 
             <div class="form-group">
 
-                <label for="fromDate" class="col-sm-2"> Kies een deadline</label> 
+                <label asp-for="deadline" class="col-sm-2"></label>
                 <div class="col-sm-10">
-                    <input type="text" id="fromDate" name ="deadline" class="datepicker form-control" />
+                    <input asp-for="deadline" id="fromDate" class="datepicker form-control" />
                 </div>
+
+                @*<label for="fromDate" class="col-sm-2"> Kies een deadline</label>
+                <div class="col-sm-10">
+                    <input type="text" id="fromDate" name="deadline" class="datepicker form-control" />
+                </div>*@
 
             </div>
 

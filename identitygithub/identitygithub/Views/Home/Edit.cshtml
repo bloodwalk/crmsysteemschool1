@@ -2,17 +2,15 @@
 @{
     ViewData["Title"] = "Edit";
 }
-<h2>Admin</h2>
+<h2>Edit Student Page</h2>
 
-<form asp-controller="Home" asp-action="GetEditData" data-ajax="true" data-ajax-method="GET" data-ajax-mode="replace"
-      data-ajax-update="#EditData" data-ajax-loading="#divloading" class="form-horizontal">
+<form asp-controller="Home" asp-action="GetEditDataAsync" data-ajax="true" data-ajax-method="GET" data-ajax-mode="replace"
+      data-ajax-update="#EditData" data-ajax-loading="#divloading" data-ajax-success="onSuccess" class="form-horizontal">
 
     <input type="text" name="editsearch" id="SearchBox">
     <input type="submit" value="Search" id="EditSubmit">
-
+    @*data-ajax-success="onSuccess"*@
 </form>
-
-
 
 <div id="divloading" style="margin: 0px; padding: 0px; position: fixed; right: 0px;
         top: 0px; width: 100%; height: 100%; background-color:#ffffff; z-index: 300001;

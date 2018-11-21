@@ -32,6 +32,7 @@
         }
        // source:availableTags
     })
+});
 
 
 
@@ -116,7 +117,7 @@
     //    $(this).hide();
     //}); datepicker en jquery werken allebei gewoon
 
-});
+
 
 function Success() {
 

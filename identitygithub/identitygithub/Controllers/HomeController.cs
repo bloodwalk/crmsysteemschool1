@@ -410,18 +410,22 @@ namespace PluralsightDemo.Controllers
 
         [HttpGet]
         [Authorize(Roles = Constants.AdministratorRole)]        
-        public IActionResult GetEditData(string editsearch)
+        public async Task<IActionResult> GetEditDataAsync(string editsearch)
         {
             Thread.Sleep(3000);
             //if (editsearch == "naam3") {
             //    return new JsonResult("works");
             //}
-           // var Edituser = await _context.Users.Where(student => student.naam == editsearch).FirstOrDefaultAsync();//.ToListAsync();
-
+            
+            var Edituser = await _context.Users.Where(student => student.naam == editsearch).FirstOrDefaultAsync();//.ToListAsync();
+            if (Edituser == null)
+            {
+                //return HttpNotFound(); moet nog wat anders worden
+            }
 
             // var Edituser = await userManager.FindByNameAsync(editsearch);
-           // return new JsonResult("demo1");
-            return PartialView("_EditPartial");
+            // return new JsonResult("demo1");
+            return PartialView("_EditPartial",Edituser);
         }
 
 

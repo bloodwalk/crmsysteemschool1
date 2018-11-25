@@ -5,6 +5,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading;
 using System.Threading.Tasks;
+using identitygithub.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -279,9 +280,9 @@ namespace PluralsightDemo.Controllers
 
         [HttpGet]
         [Authorize(Roles = Constants.AdministratorRole)]
-        public IActionResult ConvertPendingToStudent()
+        public async Task<IActionResult> ConvertPendingToStudentAsync()
         {
-            List<PluralsightUser> PendingUsers = _context.Users.Where(x => x.IsPending == true).ToList();
+            List<PluralsightUser> PendingUsers = await _context.Users.Where(x => x.IsPending == true).ToListAsync();
 
             return View("ConvertPendingToStudent", PendingUsers);
         }
@@ -451,6 +452,60 @@ namespace PluralsightDemo.Controllers
             // return new JsonResult("demo1");
             
         }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(RegisterModel model)
+        {
+            if (ModelState.IsValid)
+            {
+               
+                var EditUser = await userManager.FindByNameAsync(model.UserName);
+                
+
+                if (EditUser != null)
+                {
+                    EditUser.woonplaats = model.woonplaats;
+                    EditUser.postcode = model.postcode;
+                    EditUser.naam = model.naam;
+                    EditUser.deadline = model.deadline;
+                    EditUser.adress = model.adress;
+                    
+                    var result = await userManager.UpdateAsync(EditUser);
+
+                    //if (result.Succeeded)
+                    //{
+                    //    var token = await userManager.GenerateEmailConfirmationTokenAsync(user);
+                    //    var confirmationEmail = Url.Action("ConfirmEmailAddress", "Home",
+                    //        new { token = token, email = user.Email }, Request.Scheme);
+                    //    System.IO.File.WriteAllText("confirmationLink.txt", confirmationEmail);
+                    //}
+                    //else
+
+                    if (!result.Succeeded)
+                    {
+                        foreach (var error in result.Errors)
+                        {
+                            ModelState.AddModelError("", error.Description);
+                        }
+
+                        return View();
+                    }
+                }
+
+                return View("Success");
+            }
+
+            return View();
+
+        }
+
+
+
+
+
+
 
 
         //[HttpGet]

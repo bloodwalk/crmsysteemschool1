@@ -40,10 +40,29 @@
 
 /*voor datatime cs*/
 
+#EditSubmit {
+    
+    background-color: #4CAF50;
+    border: 2px solid red;
+    color: white;
+    padding: 1px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    font-weight:bold;
 
-#notificationsheader {
+}
+
+    #EditSubmit:hover {
+        background-color:darkblue;
+        font-size: 110%;
+    }
+    #notificationsheader {
     background-color: black;
-    color:green;
+    color: green;
     font-weight: bold;
     text-align: center;
 }

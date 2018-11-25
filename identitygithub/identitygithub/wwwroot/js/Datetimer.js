@@ -117,17 +117,21 @@
     //    $(this).hide();
     //}); datepicker en jquery werken allebei gewoon
 
+var onSuccess = function (context) {
+    // alert(context);
 
+    $(".datepicker").datepicker({ format: 'dd/mm/yyyy', autoclose: true, todayBtn: 'linked' })
+};
 
-function Success() {
+//function Success() {
 
-    //$('#divloading').hide();
+//    //$('#divloading').hide();
 
-    //data - ajax - success="Success"data - ajax - failure="Failure"
-}
+//    //data - ajax - success="Success"data - ajax - failure="Failure"
+//}
 
-function Failure() {
+//function Failure() {
 
-    //$('#divloading').hide();
-    //alert("Form Failed");
-}
+//    //$('#divloading').hide();
+//    //alert("Form Failed");
+//}

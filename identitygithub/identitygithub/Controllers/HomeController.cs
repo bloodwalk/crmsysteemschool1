@@ -280,7 +280,7 @@ namespace PluralsightDemo.Controllers
 
         [HttpGet]
         [Authorize(Roles = Constants.AdministratorRole)]
-        public async Task<IActionResult> ConvertPendingToStudentAsync()
+        public async Task<IActionResult> ConvertPendingToStudent()
         {
             List<PluralsightUser> PendingUsers = await _context.Users.Where(x => x.IsPending == true).ToListAsync();
 

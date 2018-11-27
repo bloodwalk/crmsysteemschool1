@@ -97,7 +97,7 @@
 
 
 .mybuttons {   
-    background-color: #4CAF50;   
+    background-color: darkblue;   
     color: white;
     padding: 15px 32px;
     text-align: center;
@@ -107,7 +107,7 @@
     margin: 4px 2px;
     cursor: pointer;
     font-weight:bold;
-    border:3px solid red;
+    /*border:3px solid red;*/
 }
 
 #logoutbutton {

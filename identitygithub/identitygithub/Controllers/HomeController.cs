@@ -511,10 +511,10 @@ namespace PluralsightDemo.Controllers
         //public IActionResult SendInvitation()
         //{
         //    var message = new MimeMessage();
-        //    message.From.Add(new MailboxAddress("jordy","jordy.tak@gmail.com"));
+        //    message.From.Add(new MailboxAddress("jordy","jookkkm"));
 
 
-        //    message.To.Add(new MailboxAddress("jordy", "jordy.tak@gmail.com"));
+        //    message.To.Add(new MailboxAddress("jordy", "jorkkkom"));
 
         //    message.Subject = "Email using asp.net core";
 
@@ -528,7 +528,7 @@ namespace PluralsightDemo.Controllers
 
         //        client.ServerCertificateValidationCallback = (s, c, h, e) => true;// nieuwe lijn
         //        client.Connect("smtp.gmail.com", 587, false);
-        //        client.Authenticate("jordy.tak@gmail.com", "jordy5335748");
+        //        client.Authenticate("j);
         //        client.Send(message);
         //        client.Disconnect(true);
         //       // client.ServerCertificateValidationCallback=

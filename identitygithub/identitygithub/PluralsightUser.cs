@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace PluralsightDemo
@@ -15,10 +16,31 @@ namespace PluralsightDemo
         public bool IsPending { get; set; }
         // new data
         public DateTime deadline { get; set; }
+        //public int NotititieId { get; set; }
+        public List<Notitie> Notities { get; set; }
         // public string somenewvariable { get; set; } = "test";
       //  public DbSet<pendingobject2> UserLogt { get; set; }
 
     }
+
+
+    public class Notitie {
+
+        public int Id { get; set; }
+
+        [DataType(DataType.MultilineText)]
+        public string Textarea { get; set; }
+
+        public DateTime Datum { get; set; }
+        public string onderwerp { get; set; }
+        public PluralsightUser User { get; set; }
+        public string UserId { get; set; }
+
+    }
+
+
+    //<textarea asp-for="Body" class="form-control"></textarea>// de html
+
 
     //public class pendingobject
     //{

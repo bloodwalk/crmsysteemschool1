@@ -129,6 +129,28 @@ namespace identitygithub.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("PluralsightDemo.Notitie", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("Datum");
+
+                    b.Property<string>("Textarea");
+
+                    b.Property<string>("UserId")
+                        .IsRequired();
+
+                    b.Property<string>("onderwerp");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Notitie");
+                });
+
             modelBuilder.Entity("PluralsightDemo.PluralsightUser", b =>
                 {
                     b.Property<string>("Id")
@@ -233,6 +255,14 @@ namespace identitygithub.Migrations
                 {
                     b.HasOne("PluralsightDemo.PluralsightUser")
                         .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("PluralsightDemo.Notitie", b =>
+                {
+                    b.HasOne("PluralsightDemo.PluralsightUser", "User")
+                        .WithMany("Notities")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

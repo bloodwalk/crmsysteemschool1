@@ -15,6 +15,23 @@ namespace PluralsightDemo
         {
             base.OnModelCreating(builder);
 
+
+            builder.Entity<PluralsightUser>().HasMany(x => x.Notities).WithOne(y => y.User).IsRequired();
+
+
+            //builder.Entity<Notitie>(notitie =>
+            //{
+            //    notitie.ToTable("Notities");
+            //    notitie.HasKey(x => x.Id);
+
+            //    notitie.HasOne<PluralsightUser>().WithMany().HasPrincipalKey(x => x.NotititieId).IsRequired(false);
+
+
+            //});
+
+
+
+
             //builder.Entity<pendingobject>(pending => {
 
             //    pending.ToTable("Pendingobjects");

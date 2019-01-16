@@ -75,7 +75,7 @@ namespace PluralsightDemo
             app.UseStaticFiles();
             app.UseMvc(routes =>
             {
-                routes.MapRoute("default", "{controller=Home}/{action=Login}/{id?}");
+                routes.MapRoute("default", "{controller=Home}/{action=Login}");
             });
         }
     }

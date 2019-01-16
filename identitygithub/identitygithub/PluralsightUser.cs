@@ -8,6 +8,10 @@ namespace PluralsightDemo
 {
     public class PluralsightUser : IdentityUser
     {
+        public PluralsightUser() {
+
+           // Notities = new ICollection<Notitie>();
+        }
 
         public string adress { get; set; }
         public string postcode { get; set; }
@@ -17,7 +21,7 @@ namespace PluralsightDemo
         // new data
         public DateTime deadline { get; set; }
         //public int NotititieId { get; set; }
-        public List<Notitie> Notities { get; set; }
+        public ICollection<Notitie> Notities { get; set; }
         // public string somenewvariable { get; set; } = "test";
       //  public DbSet<pendingobject2> UserLogt { get; set; }
 
@@ -26,6 +30,7 @@ namespace PluralsightDemo
 
     public class Notitie {
 
+        
         public int Id { get; set; }
 
         [DataType(DataType.MultilineText)]

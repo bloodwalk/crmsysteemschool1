@@ -16,7 +16,19 @@ namespace PluralsightDemo
             base.OnModelCreating(builder);
 
 
-            builder.Entity<PluralsightUser>().HasMany(x => x.Notities).WithOne(y => y.User).IsRequired();
+
+                 //builder.Entity<Notitie>()               
+                 //  .WithMany(a => a.Notifications)
+                 // .HasForeignKey(n => n.ApplicationUserId)
+                 //  .WillCascadeOnDelete(false);
+
+
+
+
+            builder.Entity<PluralsightUser>()
+                .HasMany(x => x.Notities)
+                .WithOne(y => y.User).HasForeignKey(x=>x.UserId)
+                .IsRequired();
 
 
             //builder.Entity<Notitie>(notitie =>

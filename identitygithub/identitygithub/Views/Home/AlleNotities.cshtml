@@ -1,0 +1,19 @@
+﻿@model List<PluralsightUser>
+
+<div class="row">
+    <div class="col-xs-8 col-xs-offset-2">
+        <h1 class="text-center">Alle Notities</h1>
+        
+        @foreach (var user in @Model) {
+
+            @foreach (var notitie in user.Notities) {
+
+                @notitie.Textarea;
+            }
+
+        }
+
+
+
+    </div>
+</div>

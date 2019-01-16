@@ -524,8 +524,10 @@ namespace PluralsightDemo.Controllers
             {
 
 
-                var user = await userManager.FindByNameAsync(model.User.UserName);
-
+                //var user = await userManager.FindByNameAsync(model.User.UserName).; // moet mischien nog new list<> worden, ff testen
+                var user = await userManager.Users.Where(x => x.UserName == model.User.UserName).Include(x => x.Notities)
+                    .FirstOrDefaultAsync();
+               
                 if (user != null)
                 {
 
@@ -538,21 +540,21 @@ namespace PluralsightDemo.Controllers
                     };
 
 
-                    user.Notities = new List<Notitie>();
-
                     user.Notities.Add(notitie);
+                    //var result = await _context.SaveChangesAsync();
+                    
 
                     var result = await userManager.UpdateAsync(user);
 
-                    if (!result.Succeeded)
-                    {
-                        foreach (var error in result.Errors)
-                        {
-                            ModelState.AddModelError("", error.Description);
-                        }
+                    //if (!result.Succeeded)
+                    //{
+                    //    foreach (var error in result.Errors)
+                    //    {
+                    //        ModelState.AddModelError("", error.Description);
+                    //    }
 
-                        return View();
-                    }
+                    //    return View();
+                    //}
                     return View("Success");
                 }
 
@@ -565,7 +567,20 @@ namespace PluralsightDemo.Controllers
 
 
 
+        [HttpGet]
+        [Authorize(Roles = Constants.AdministratorRole)]
+        public async Task<IActionResult> AlleNotities()
+        {
 
+            var user = await userManager.Users.Include(x => x.Notities).Where(x=>x.Notities.Count!= 0).ToListAsync(); // nog async maken
+
+            // kan ook zonder usermanger mocht het fout gaan
+
+            // var user =await userManager.FindByNameAsync("jordytak@gmail.com").;
+
+
+            return View(user);
+        }
 
 
 

@@ -508,24 +508,24 @@ namespace PluralsightDemo.Controllers
 
         [HttpGet]
         [Authorize(Roles = Constants.AdministratorRole)]
-        public IActionResult NotitieTest()
+        public IActionResult NotitieToevoegen(Guid id)
         {
 
-
+            @ViewBag.ProductId = id;
             return View();
         }
 
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> NotitieTest(Notitie model)// moet nog Notitiemodel worden voor onverwachte input
+        public async Task<IActionResult> NotitieToevoegen(Notitie model)// moet nog Notitiemodel worden voor onverwachte input
         {
             if (ModelState.IsValid)
             {
 
 
                 //var user = await userManager.FindByNameAsync(model.User.UserName).; // moet mischien nog new list<> worden, ff testen
-                var user = await userManager.Users.Where(x => x.UserName == model.User.UserName).Include(x => x.Notities)
+                var user = await userManager.Users.Where(x => x.Id == model.User.Id).Include(x => x.Notities)
                     .FirstOrDefaultAsync();
                
                 if (user != null)
@@ -572,10 +572,10 @@ namespace PluralsightDemo.Controllers
         public async Task<IActionResult> AlleNotities()
         {
 
-            var user = await userManager.Users.Include(x => x.Notities).Where(x=>x.Notities.Count!= 0).ToListAsync(); // nog async maken
-
+            var user = await userManager.Users.Include(x => x.Notities).Where(x=>x.Notities.Count!= 0).OrderBy(p => p.naam).ToListAsync(); // nog async maken
+            //var g = user.OrderBy(p => p.naam);
             // kan ook zonder usermanger mocht het fout gaan
-
+           
             // var user =await userManager.FindByNameAsync("jordytak@gmail.com").;
 
 
@@ -584,7 +584,15 @@ namespace PluralsightDemo.Controllers
 
 
 
+        [HttpGet]
+        [Authorize(Roles = Constants.AdministratorRole)]
+        public async Task<IActionResult> NotitiesVanPersoon(Guid id)
+        {
+            var user = await userManager.Users.Where(x => x.Id == id.ToString()).Include(x => x.Notities)
+                   .FirstOrDefaultAsync();
 
+            return View(user);
+        }
 
 
 

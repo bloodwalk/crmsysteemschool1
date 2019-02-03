@@ -122,12 +122,13 @@
 /*//////////////////////////////////////////alle notities begint hier///////////////////////////////////////////////////*/
 
 
-    .caret2::before {
-        content: "\25BC";
-        color: white;
-        display: block;
-        margin-right: 6px; /*6 is defualt*/
-    }
+/*.caret2::before {
+    content: "\25BC";
+    color: white;
+    display: block;
+    margin-right: 6px;
+}
+    
 
 
 .crmbutton {
@@ -140,7 +141,7 @@
     display: inline;
     font-size: 16px;
     cursor: pointer;
-    width: 65%; /*//veranderd was eerst 50*/
+    width: 65%; 
     position: relative;
     margin: auto;
     border-radius: 12px;
@@ -156,13 +157,13 @@
     margin: auto;
     width: 100%;
     text-align: center;
-}
+}*/
 
-.shownotities {
+/*.shownotities {
     display: none;
-    width: 65%; /*veranderd van 50 naar 100*/
+    width: 65%; 
     margin: auto;
-}
+}*/
 
 
 
@@ -185,7 +186,7 @@
     color: blue;
 }
 
-#crmbutton2 {
+/*#crmbutton2 {
     background-color: red;
     border: none;
     color: white;
@@ -207,8 +208,8 @@
 
 #test {
     margin-left: 135px; 
-  /*/135 default*/
-}
+  
+}*/
 
 
 

@@ -1,0 +1,34 @@
+﻿@model PluralsightUser
+<div class="row">
+    <div class="col-xs-8 col-xs-offset-2">
+        <h1 class="text-center">Alle Notities</h1>
+
+        <div class="text-center">
+            @foreach (var notitie in @Model.Notities)
+            {
+
+
+                <hr class="hr">
+                <span class="notitieinformatie">Datum: @notitie.Datum.ToShortDateString()</span>
+                <hr class="hr">
+                <span class="notitieinformatie">Onderwerp: @notitie.onderwerp</span>
+                <hr class="hr">
+
+                @notitie.Textarea
+
+                <br>
+                <br>
+
+
+
+            }
+
+            <a href='@Url.Action("AlleNotities", "Home")'>
+                <input type='button' value='Terug naar Notities' />
+            </a>
+        </div>
+
+        
+
+    </div>
+</div>

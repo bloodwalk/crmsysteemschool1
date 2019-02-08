@@ -4,6 +4,8 @@
         <h1 class="text-center">Alle Notities</h1>
 
         <div class="text-center">
+
+
             @foreach (var notitie in @Model.Notities)
             {
 
@@ -18,7 +20,10 @@
 
                 <br>
                 <br>
-
+                <a href='@Url.Action("EditNotities", "Home", new { modelId= notitie.Id, gebruikerId= Model.Id})'>
+                       
+                    <input type='button' value='Edit Notitie' />
+                </a>
 
 
             }

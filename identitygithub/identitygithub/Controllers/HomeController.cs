@@ -416,7 +416,7 @@ namespace PluralsightDemo.Controllers
         [Authorize(Roles = Constants.AdministratorRole)]        
         public async Task<IActionResult> GetEditDataAsync(string editsearch)
         {
-            Thread.Sleep(3000);
+           
             //if (editsearch == "naam3") {
             //    return new JsonResult("works");
             //}
@@ -524,7 +524,7 @@ namespace PluralsightDemo.Controllers
             {
 
 
-                //var user = await userManager.FindByNameAsync(model.User.UserName).; // moet mischien nog new list<> worden, ff testen
+               
                 var user = await userManager.Users.Where(x => x.Id == model.User.Id).Include(x => x.Notities)
                     .FirstOrDefaultAsync();
                
@@ -589,12 +589,78 @@ namespace PluralsightDemo.Controllers
         public async Task<IActionResult> NotitiesVanPersoon(Guid id)
         {
             var user = await userManager.Users.Where(x => x.Id == id.ToString()).Include(x => x.Notities)
-                   .FirstOrDefaultAsync();
-
+                   .FirstOrDefaultAsync();           
+            
             return View(user);
         }
 
+        [HttpGet]
+        [Authorize(Roles = Constants.AdministratorRole)]
+        public async Task<IActionResult> EditNotities(int modelId,Guid gebruikerId)
+        {
+            @ViewBag.Id = gebruikerId;
+            @ViewBag.notitieId = modelId;
+            var Editnotitie = await userManager.Users.Where(x => x.Id == gebruikerId.ToString())             
+            // .Select(y => y.Notities.Where(notitie => notitie.Id == id))
+              .SelectMany(x => x.Notities.Where(notitie => notitie.Id == modelId)).FirstOrDefaultAsync(); // kan misschien nog beter>?
+           // .Include(x => x.Notities)
+           // var test = await userManager.Users.SelectMany(x => x.Notities.Where(notitie => notitie.Id == modelId)).FirstOrDefaultAsync();
+           // var test2 = test.Textarea;
+           //.Where(gebruiker => gebruiker.Notities.ToString() == modelId.ToString()))
 
+            // var number = user.Notities.Count;
+            //var notitie = user.Notities.Where(x=>x.Id.ToString()==modelId.ToString()).FirstOrDefault();
+
+            if (Editnotitie == null)
+                {
+                    //something went wrong 
+                }
+
+                return View(Editnotitie);
+                    
+        }
+
+
+
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditNotities(Notitie model)// moet nog Notitiemodel worden voor onverwachte input
+        {
+            if (ModelState.IsValid)
+            {
+
+                var Editnotitie = await userManager.Users.Where(x => x.Id == model.User.Id.ToString())
+                 .SelectMany(x => x.Notities.Where(notitie => notitie.Id == model.Id)).Include(x=>x.User).FirstOrDefaultAsync();
+                // model id bestaat nog niet
+                // var user = await userManager.Users.Where(x => x.Id == model.User.Id).Include(x => x.Notities)
+                // .FirstOrDefaultAsync();
+                var gebruiker = Editnotitie.User;
+
+                if (Editnotitie != null)
+                {
+
+                    Editnotitie.onderwerp = model.onderwerp;
+                    Editnotitie.Textarea = model.Textarea;
+
+                   
+
+
+                                      
+
+                    var result = await userManager.UpdateAsync(Editnotitie.User);
+
+
+                    return RedirectToAction("AlleNotities", "Home"); // misschien naar andere pagina verwijzen
+                }
+
+
+            }
+            // model errors / meer info(ook voor een paar andere views )
+            return View();
+
+        }
 
 
 

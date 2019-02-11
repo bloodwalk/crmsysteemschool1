@@ -1,50 +1,55 @@
 ﻿@model List<PluralsightUser>
 <div class="row">
     <div class="col-xs-8 col-xs-offset-2">
-<h1 class="text-center">Alle Notities</h1>
+        <h1 class="text-center">Alle Notities</h1>
 
-@if (Model.Count == 0)
-{
+        @if (Model.Count == 0)
+        {
 
-    <h2 class="center"> er zijn geen notities gevonden!</h2>
-}
-
-else
-{
-    <table>
-        <tr>
-            <th>ID</th>
-            <th>Naam</th>
-            <th>Aantal notities</th>
-            <th>Notitie toevoegen</th>
-            <th>Toon/Edit notities</th>
-
-        </tr>
-
-        @foreach (var Person in @Model) {
-        <tr>
-            <td>@Person.Id</td>
-            <td>@Person.naam</td>
-            <td>@Person.Notities.Count</td>
-            <td>
-                <a asp-controller="Home"
-                   asp-action="NotitieToevoegen"
-                   asp-route-id="@Person.Id">
-                    Notitie Toevoegen
-                </a>
-            </td>
-            <td>
-                <a asp-controller="Home"
-                   asp-action="NotitiesVanPersoon"
-                   asp-route-id="@Person.Id">
-                    Toon/Edit Notities
-                </a>
-            </td>
-
-        </tr>        
+            <h2 class="center"> er zijn geen notities gevonden!</h2>
         }
-    </table>
 
-}
-</div>
+        else
+        {
+
+            <label for="searchbox">Search:</label> <input type="text" name="editsearch2" id="searchbox">
+
+           
+            <table id="EditTable">
+                <tr>
+                    <th>ID</th>
+                    <th>Naam</th>
+                    <th>Aantal notities</th>
+                    <th>Notitie toevoegen</th>
+                    <th>Toon/Edit notities</th>
+
+                </tr>
+
+                @foreach (var Person in @Model)
+                {
+                    <tr>
+                        <td>@Person.Id</td>
+                        <td>@Person.naam</td>
+                        <td>@Person.Notities.Count</td>
+                        <td>
+                            <a asp-controller="Home"
+                               asp-action="NotitieToevoegen"
+                               asp-route-id="@Person.Id">
+                                Notitie Toevoegen
+                            </a>
+                        </td>
+                        <td>
+                            <a asp-controller="Home"
+                               asp-action="NotitiesVanPersoon"
+                               asp-route-id="@Person.Id">
+                                Toon/Edit Notities
+                            </a>
+                        </td>
+
+                    </tr>
+                }
+            </table>
+            
+        }
+    </div>
     </div>

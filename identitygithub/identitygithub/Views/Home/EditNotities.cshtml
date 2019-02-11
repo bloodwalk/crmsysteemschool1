@@ -11,7 +11,7 @@
                     <input asp-for="onderwerp" class="form-control" />
                 </div>
             </div>
-            <input type="hidden" asp-for="User.Id" value="@ViewBag.Id" />
+            <input type="hidden" asp-for="User.Id" value="@ViewBag.Id" /> @*moet itct id worden*@
             <input type="hidden" asp-for="Id" value=" @ViewBag.notitieId" />
             <div class="form-group">
                 <label asp-for="Textarea" class="col-sm-2"></label>

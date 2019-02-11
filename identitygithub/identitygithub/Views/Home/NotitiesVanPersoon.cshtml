@@ -5,7 +5,8 @@
 
         <div class="text-center">
 
-
+            @if (Model.Notities.Count != 0)
+            {
             @foreach (var notitie in @Model.Notities)
             {
 
@@ -20,14 +21,21 @@
 
                 <br>
                 <br>
-                <a href='@Url.Action("EditNotities", "Home", new { modelId= notitie.Id, gebruikerId= Model.Id})'>
-                       
+                <a href='@Url.Action("EditNotities", "Home", new { modelId = notitie.Id, gebruikerId = Model.Id })'>
+
                     <input type='button' value='Edit Notitie' />
                 </a>
 
 
             }
+            }
+            else {
 
+                <h2 class="text-center">geen notities gevonden</h2>
+            }
+            <br>
+            <br>
+            <hr class="hr">
             <a href='@Url.Action("AlleNotities", "Home")'>
                 <input type='button' value='Terug naar Notities' />
             </a>

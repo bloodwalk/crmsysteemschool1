@@ -32,13 +32,52 @@
         }
        // source:availableTags
     })
+    // hier begint keyup 
+    $("#searchbox").keyup(function () {
+        
+        $("#EditTable tr").each(test);
+      
+       
+       
 
-    // hier begint alle notities/////////////////////////////////////////////////////////////////////////
-    
-    
-    
-    //hier eindigd alle notities
-    
+
+    }); // einde searchbox
+
+    var test = function test() {
+       // alert("also works");
+        var row = $(this);
+        var columns = $(this).find('td').eq(1);
+        columns.each(function () {
+            var bool = false;
+            var columnname = $(this).text();
+            var searchvalue = $("#searchbox").val();
+            //alert(columnname);			
+            //alert(searchvalue);
+
+
+            if (columnname.toLowerCase().startsWith(searchvalue.toLowerCase())) {
+
+                var bool = true;
+            }
+
+
+
+
+            if (bool) {
+
+                row.show();
+
+            }
+            else {
+                row.hide();
+            }
+
+
+        });
+    }
+   
+
+    // hier eindigd keyup
 });
 
 

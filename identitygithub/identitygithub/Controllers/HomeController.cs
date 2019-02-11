@@ -555,7 +555,8 @@ namespace PluralsightDemo.Controllers
 
                     //    return View();
                     //}
-                    return View("Success");
+                    //return View("Success");
+                    return RedirectToAction("AlleNotities", "Home");
                 }
 
                 
@@ -572,11 +573,26 @@ namespace PluralsightDemo.Controllers
         public async Task<IActionResult> AlleNotities()
         {
 
-            var user = await userManager.Users.Include(x => x.Notities).Where(x=>x.Notities.Count!= 0).OrderBy(p => p.naam).ToListAsync(); // nog async maken
-            //var g = user.OrderBy(p => p.naam);
-            // kan ook zonder usermanger mocht het fout gaan
-           
+            var user = await userManager.Users.Include(x => x.Notities).OrderBy(p => p.naam).ToListAsync();
+            // nog async maken
+              //var g = user.OrderBy(p => p.naam);
+          // kan ook zonder usermanger mocht het fout gaan
+
             // var user =await userManager.FindByNameAsync("jordytak@gmail.com").;
+
+
+
+            foreach (var student in user.ToList())
+            {
+
+                var isAdmin = await userManager.IsInRoleAsync(student, Constants.AdministratorRole);
+
+                if (isAdmin)
+                {
+                    // Lijst2.Remove(student);
+                    user.Remove(student);
+                }
+            }
 
 
             return View(user);
@@ -663,9 +679,9 @@ namespace PluralsightDemo.Controllers
         }
 
 
+        // Edit notities functionaliteit
 
-
-
+       
 
 
         //[HttpGet]

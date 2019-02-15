@@ -1,6 +1,7 @@
 ﻿$(document).ready(function () {
    // alert("het");
    // alert("jquery works");
+   
     $(".datepicker").datepicker({ format: 'dd/mm/yyyy', autoclose: true, todayBtn: 'linked' })
 
    // $("#SearchBox").css("background-color", "yellow"); pakt hem dus wel
@@ -32,6 +33,7 @@
         }
        // source:availableTags
     })
+    //alert("also works");
     // hier begint keyup 
     $("#searchbox").keyup(function () {
         
@@ -46,12 +48,12 @@
     var test = function test() {
        // alert("also works");
         var row = $(this);
-        var columns = $(this).find('td').eq(1);
+        var columns = $(this).find('td').eq(0);
         columns.each(function () {
             var bool = false;
             var columnname = $(this).text();
             var searchvalue = $("#searchbox").val();
-            //alert(columnname);			
+           // alert(columnname);			
             //alert(searchvalue);
 
 

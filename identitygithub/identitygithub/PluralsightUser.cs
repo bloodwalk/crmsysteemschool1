@@ -30,13 +30,15 @@ namespace PluralsightDemo
 
     public class Notitie {
 
-        
+
         public int Id { get; set; }
 
+        [Required]
         [DataType(DataType.MultilineText)]
         public string Textarea { get; set; }
 
         public DateTime Datum { get; set; }
+        [Required]
         public string onderwerp { get; set; }
         public PluralsightUser User { get; set; }
         public string UserId { get; set; }

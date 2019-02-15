@@ -602,12 +602,14 @@ namespace PluralsightDemo.Controllers
 
         [HttpGet]
         [Authorize(Roles = Constants.AdministratorRole)]
-        public async Task<IActionResult> NotitiesVanPersoon(Guid id)
+        public async Task<IActionResult> NotitieVanPersoon(Guid id, int notitieId)
         {
-            var user = await userManager.Users.Where(x => x.Id == id.ToString()).Include(x => x.Notities)
-                   .FirstOrDefaultAsync();           
-            
-            return View(user);
+            //var user = await userManager.Users.Where(x => x.Id == id.ToString()).Include(x => x.Notities)
+            //       .FirstOrDefaultAsync();
+            var notitie = await userManager.Users.Where(x => x.Id == id.ToString())
+                 .SelectMany(x => x.Notities.Where(notities => notities.Id == notitieId)).Include(x => x.User).FirstOrDefaultAsync();
+
+            return View(notitie);
         }
 
         [HttpGet]
@@ -616,14 +618,11 @@ namespace PluralsightDemo.Controllers
         {
             @ViewBag.Id = gebruikerId;
             @ViewBag.notitieId = modelId;
+           
             var Editnotitie = await userManager.Users.Where(x => x.Id == gebruikerId.ToString())             
             // .Select(y => y.Notities.Where(notitie => notitie.Id == id))
-              .SelectMany(x => x.Notities.Where(notitie => notitie.Id == modelId)).FirstOrDefaultAsync(); // kan misschien nog beter>?
-           // .Include(x => x.Notities)
-           // var test = await userManager.Users.SelectMany(x => x.Notities.Where(notitie => notitie.Id == modelId)).FirstOrDefaultAsync();
-           // var test2 = test.Textarea;
-           //.Where(gebruiker => gebruiker.Notities.ToString() == modelId.ToString()))
-
+              .SelectMany(x => x.Notities.Where(notitie => notitie.Id == modelId)).FirstOrDefaultAsync(); 
+            @ViewBag.datum = Editnotitie.Datum.ToShortDateString();
             // var number = user.Notities.Count;
             //var notitie = user.Notities.Where(x=>x.Id.ToString()==modelId.ToString()).FirstOrDefault();
 
@@ -681,9 +680,17 @@ namespace PluralsightDemo.Controllers
 
         // Edit notities functionaliteit
 
-       
+        [HttpGet]
+        [Authorize(Roles = Constants.AdministratorRole)]
+        public async Task<IActionResult> NotitiesVanPersoonTabel(Guid id)
+        {
+            var user = await userManager.Users.Where(x => x.Id == id.ToString()).Include(x => x.Notities)
+                   .FirstOrDefaultAsync();
 
+            return View(user);
+        }
 
+        
         //[HttpGet]
         //[Authorize(Roles = Constants.AdministratorRole)]
         //public IActionResult SendInvitation()

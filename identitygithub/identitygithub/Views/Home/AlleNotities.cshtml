@@ -14,21 +14,19 @@
 
             <label for="searchbox">Search:</label> <input type="text" name="editsearch2" id="searchbox">
 
-           
+
             <table id="EditTable">
                 <tr>
-                    <th>ID</th>
                     <th>Naam</th>
                     <th>Aantal notities</th>
                     <th>Notitie toevoegen</th>
                     <th>Toon/Edit notities</th>
-
                 </tr>
 
                 @foreach (var Person in @Model)
                 {
                     <tr>
-                        <td>@Person.Id</td>
+
                         <td>@Person.naam</td>
                         <td>@Person.Notities.Count</td>
                         <td>
@@ -40,7 +38,7 @@
                         </td>
                         <td>
                             <a asp-controller="Home"
-                               asp-action="NotitiesVanPersoon"
+                               asp-action="NotitiesVanPersoonTabel"
                                asp-route-id="@Person.Id">
                                 Toon/Edit Notities
                             </a>
@@ -49,7 +47,10 @@
                     </tr>
                 }
             </table>
-            
+            <a href='@Url.Action("Admin", "Home")'>
+                <input type='button' value='Terug naar Admin' />
+            </a>
+
         }
     </div>
     </div>

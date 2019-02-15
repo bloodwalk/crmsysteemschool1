@@ -1,0 +1,34 @@
+﻿@model Notitie;
+<div class="row">
+    <div class="col-xs-8 col-xs-offset-2">
+        <h1 class="text-center">Notitie</h1>
+
+        <div class="text-center">
+
+                <hr class="hr">
+                <span class="notitieinformatie">Datum: @Model.Datum.ToShortDateString()</span>
+                <hr class="hr">
+                <span class="notitieinformatie">Onderwerp: @Model.onderwerp</span>
+                <hr class="hr">
+
+                @Model.Textarea;
+
+                <br>
+                <br>
+                <a href='@Url.Action("EditNotities", "Home", new { modelId = Model.Id, gebruikerId = Model.User.Id })'>
+
+                    <input type='button' value='Edit Notitie' />
+                </a>
+         
+            <br>
+            <br>
+            <hr class="hr">
+            <a href='@Url.Action("NotitiesVanPersoonTabel", "Home" , new { id = Model.User.Id })'>
+                <input type='button' value='Terug naar NotitieTabel' />
+            </a>
+        </div>
+
+        
+
+    </div>
+</div>

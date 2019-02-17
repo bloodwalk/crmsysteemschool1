@@ -15,13 +15,15 @@
             <label for="searchbox">Search:</label> <input type="text" name="editsearch2" id="searchbox">
 
 
-            <table id="EditTable">
+            <table id="EditTable" class="bluetable">
+                <thead>
                 <tr>
                     <th>Naam</th>
                     <th>Aantal notities</th>
                     <th>Notitie toevoegen</th>
                     <th>Toon/Edit notities</th>
                 </tr>
+                </thead>
 
                 @foreach (var Person in @Model)
                 {

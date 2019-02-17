@@ -119,9 +119,38 @@
 }
 
 
+
+table.bluetable {
+    width: 100%;
+    text-align: center;
+}
+
+table.bluetable thead {
+    background: #1C6EA4;
+    border-bottom: 2px solid #444444;
+}
+
+    table.bluetable thead th {
+        font-size: 15px;
+        font-weight: bold;
+        color: #FFFFFF;
+        border-left: 2px solid #D0E4F5;
+        text-align: center;
+    }
+
+ table.bluetable thead th:first-child {
+    border-left: none;
+}
+
+
+    
+
+
+
+table.bluetable tr:nth-child(even) {
+    background: #D0E4F5;
+}
 /*//////////////////////////////////////////alle notities begint hier///////////////////////////////////////////////////*/
-
-
 /*.caret2::before {
     content: "\25BC";
     color: white;
@@ -158,16 +187,11 @@
     width: 100%;
     text-align: center;
 }*/
-
 /*.shownotities {
     display: none;
     width: 65%; 
     margin: auto;
 }*/
-
-
-
-
 .notitieinformatie {
     display: block;
     text-align: center;

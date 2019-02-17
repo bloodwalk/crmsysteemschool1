@@ -508,11 +508,13 @@ namespace PluralsightDemo.Controllers
 
         [HttpGet]
         [Authorize(Roles = Constants.AdministratorRole)]
-        public IActionResult NotitieToevoegen(Guid id)
+        public async Task<IActionResult> NotitieToevoegen(Guid id)
         {
-
-            @ViewBag.ProductId = id;
-            return View();
+            var gebruiker = await userManager.FindByIdAsync(id.ToString());
+            var notitie2 = new Notitie();           
+            notitie2.User = gebruiker;
+            //@ViewBag.ProductId = id;
+            return View(notitie2);
         }
 
 
@@ -616,13 +618,13 @@ namespace PluralsightDemo.Controllers
         [Authorize(Roles = Constants.AdministratorRole)]
         public async Task<IActionResult> EditNotities(int modelId,Guid gebruikerId)
         {
-            @ViewBag.Id = gebruikerId;
-            @ViewBag.notitieId = modelId;
+            //@ViewBag.Id = gebruikerId;
+            //@ViewBag.notitieId = modelId;
            
             var Editnotitie = await userManager.Users.Where(x => x.Id == gebruikerId.ToString())             
             // .Select(y => y.Notities.Where(notitie => notitie.Id == id))
-              .SelectMany(x => x.Notities.Where(notitie => notitie.Id == modelId)).FirstOrDefaultAsync(); 
-            @ViewBag.datum = Editnotitie.Datum.ToShortDateString();
+              .SelectMany(x => x.Notities.Where(notitie => notitie.Id == modelId)).Include(x=>x.User).FirstOrDefaultAsync(); 
+            //@ViewBag.datum = Editnotitie.Datum.ToShortDateString();
             // var number = user.Notities.Count;
             //var notitie = user.Notities.Where(x=>x.Id.ToString()==modelId.ToString()).FirstOrDefault();
 

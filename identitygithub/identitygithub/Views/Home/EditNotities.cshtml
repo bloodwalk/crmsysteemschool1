@@ -17,16 +17,16 @@
                 </div>
             </div>
 
-            <div class="form-group">
+            @*<div class="form-group">
                 <label asp-for="Datum" class="col-sm-2"></label>
                 <div class="col-sm-10">
                     <input asp-for="Datum" class="form-control" value="@ViewBag.datum" readonly="@(true)" />
                 </div>
-            </div>
+            </div>*@
 
 
-            <input type="hidden" asp-for="User.Id" value="@ViewBag.Id" /> @*moet itct id worden*@
-            <input type="hidden" asp-for="Id" value=" @ViewBag.notitieId" />
+            <input type="hidden" asp-for="User.Id"  /> @*moet itct id worden*@
+            <input type="hidden" asp-for="Id"  />
             <div class="form-group">
                 <label asp-for="Textarea" class="col-sm-2"></label>
                 <div class="col-sm-10">

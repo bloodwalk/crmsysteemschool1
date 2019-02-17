@@ -3,6 +3,7 @@
 <div class="row">
     <div class="col-xs-8 col-xs-offset-2">
         <h1 class="text-center">Notitie maken</h1>
+       
         <form asp-action="NotitieToevoegen" method="post" class="form-horizontal">
 
             <div class="form-group">
@@ -11,8 +12,9 @@
                     <input asp-for="onderwerp" class="form-control" />
                 </div>
             </div>
-            <input type="hidden" asp-for="User.Id" value="@ViewBag.ProductId" />
-
+            
+            <input asp-for="User.Id" type="hidden" />
+            @*@Html.HiddenFor(x=>x.User.Id, new { id =  })*@
             <div class="form-group">
                 <label asp-for="Textarea" class="col-sm-2"></label>
                 <div class="col-sm-10">

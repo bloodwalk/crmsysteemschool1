@@ -11,48 +11,54 @@
 
         else
         {
+            <div class="text-center">
+                <label for="searchbox">Search:</label> <input type="text" name="editsearch2" id="searchbox">
+             
+                
 
-            <label for="searchbox">Search:</label> <input type="text" name="editsearch2" id="searchbox">
+                <table id="EditTable" class="bluetable">
+                    <thead>
+                        <tr>
+                            <th>Naam</th>
+                            <th>Aantal notities</th>
+                            <th>Notitie toevoegen</th>
+                            <th>Toon/Edit notities</th>
+                        </tr>
+                    </thead>
 
+                    @foreach (var Person in @Model)
+                    {
+                        <tr>
 
-            <table id="EditTable" class="bluetable">
-                <thead>
-                <tr>
-                    <th>Naam</th>
-                    <th>Aantal notities</th>
-                    <th>Notitie toevoegen</th>
-                    <th>Toon/Edit notities</th>
-                </tr>
-                </thead>
+                            <td>@Person.naam</td>
+                            <td>@Person.Notities.Count</td>
+                            <td>
+                                <a asp-controller="Home"
+                                   asp-action="NotitieToevoegen"
+                                   asp-route-id="@Person.Id">
+                                    Notitie Toevoegen
+                                </a>
+                            </td>
+                            <td>
+                                <a asp-controller="Home"
+                                   asp-action="NotitiesVanPersoonTabel"
+                                   asp-route-id="@Person.Id">
+                                    Toon/Edit Notities
+                                </a>
+                            </td>
 
-                @foreach (var Person in @Model)
-                {
-                    <tr>
+                        </tr>
+                    }
+                </table>
+                <br>
+               
+                    <input type="button" class="mybuttons2" value="Terug naar Admin" onclick="location.href='@Url.Action("Admin", "Home")'" />
+                </div>
+                @*<a href='@Url.Action("Admin", "Home")'>
+                    <input type='button' value='Terug naar Admin' />
+                </a>*@
 
-                        <td>@Person.naam</td>
-                        <td>@Person.Notities.Count</td>
-                        <td>
-                            <a asp-controller="Home"
-                               asp-action="NotitieToevoegen"
-                               asp-route-id="@Person.Id">
-                                Notitie Toevoegen
-                            </a>
-                        </td>
-                        <td>
-                            <a asp-controller="Home"
-                               asp-action="NotitiesVanPersoonTabel"
-                               asp-route-id="@Person.Id">
-                                Toon/Edit Notities
-                            </a>
-                        </td>
-
-                    </tr>
                 }
-            </table>
-            <a href='@Url.Action("Admin", "Home")'>
-                <input type='button' value='Terug naar Admin' />
-            </a>
 
-        }
-    </div>
-    </div>
+            </div>
+        </div>

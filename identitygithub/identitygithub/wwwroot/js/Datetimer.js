@@ -38,49 +38,64 @@
     $("#searchbox").keyup(function () {
         
         $("#EditTable tr").each(test);
-      
-       
-       
 
 
-    }); // einde searchbox
-
-    var test = function test() {
-       // alert("also works");
-        var row = $(this);
-        var columns = $(this).find('td').eq(0);
-        columns.each(function () {
-            var bool = false;
-            var columnname = $(this).text();
-            var searchvalue = $("#searchbox").val();
-           // alert(columnname);			
-            //alert(searchvalue);
-
-
-            if (columnname.toLowerCase().startsWith(searchvalue.toLowerCase())) {
-
-                var bool = true;
+        var VisibleRows = $('#EditTable tr:visible');
+        //console.log(VisibleRows.length);
+        VisibleRows.each(function (index) {
+            
+            if (index % 2 == 0 && index != 0) {
+                console.log(index);
+                $(this).css({ "background": "#D0E4F5" });
             }
-
-
-
-
-            if (bool) {
-
-                row.show();
-
+            else if(index!=0) {
+                $(this).css({ "background": "white" })
             }
-            else {
-                row.hide();
-            }
-
-
         });
-    }
-   
+       
+        }
+            );
+       
+
+
+    // einde searchbox
+
+var test = function test() {
+    // alert("also works");
+    var row = $(this);
+    var columns = $(this).find('td').eq(0);
+    columns.each(function () {
+        var bool = false;
+        var columnname = $(this).text();
+        var searchvalue = $("#searchbox").val();
+        // alert(columnname);			
+        //alert(searchvalue);
+
+
+        if (columnname.toLowerCase().startsWith(searchvalue.toLowerCase())) {
+
+            var bool = true;
+        }
+
+
+
+
+        if (bool) {
+
+            row.show();
+
+        }
+        else {
+            row.hide();
+        }
+
+
+    });
+};
+   });
 
     // hier eindigd keyup
-});
+
 
 
 

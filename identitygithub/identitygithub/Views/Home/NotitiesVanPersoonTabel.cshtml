@@ -7,52 +7,56 @@
 
             @if (Model.Notities.Count != 0)
             {
-            <table class="bluetable">
-                <thead>
-                <tr>
-                    <th>Onderwerp</th>
-                    <th>Datum</th>
-                    <th>Begin Notitie</th>                    
-                    <th>Toon/Edit notitie</th>
+                <table class="bluetable">
+                    <thead>
+                        <tr>
+                            <th>Onderwerp</th>
+                            <th>Datum</th>
+                            <th>Begin Notitie</th>
+                            <th>Toon/Edit notitie</th>
 
-                </tr>
-                </thead>
+                        </tr>
+                    </thead>
 
-                
-               
+
+
                     @foreach (var Notitie in Model.Notities)
                     {
-                <tr>
-                    <td>@Notitie.onderwerp</td>
-                    <td>@Notitie.Datum</td>
+                        <tr>
+                            <td>@Notitie.onderwerp</td>
+                            <td>@Notitie.Datum</td>
 
-                    @if (Notitie.Textarea.Length > 23) {
-                        <td>@Notitie.Textarea.Substring(0, 23)</td>}
-                            else{
-                        <td>@Notitie.Textarea</td>}
-                    
-                    <td>
-                        <a href='@Url.Action("NotitieVanPersoon", "Home", new { notitieId = Notitie.Id, Id = Model.Id })'>
+                            @if (Notitie.Textarea.Length > 23)
+                            {
+                                <td>@Notitie.Textarea.Substring(0, 23)</td>}
+                            else
+                            {
+                                <td>@Notitie.Textarea</td>}
 
-                            Toon/Edit Notitie
-                        </a>
+                            <td>
+                                <a href='@Url.Action("NotitieVanPersoon", "Home", new { notitieId = Notitie.Id, Id = Model.Id })'>
 
-                    </td>
-                </tr>
+                                    Toon/Edit Notitie
+                                </a>
+
+                            </td>
+                        </tr>
                     }
-                
-                
-            </table>
+
+
+                </table>
             }
             else
             {
 
                 <h2 class="text-center">geen notities gevonden</h2>
             }
-           
-            <a href='@Url.Action("AlleNotities", "Home")'>
+
+
+            <input type="button" class="mybuttons2" value="Terug naar Notities" onclick="location.href='@Url.Action("AlleNotities", "Home")'" />
+            @*<a href='@Url.Action("AlleNotities", "Home")'>
                 <input type='button' value='Terug naar Notities' />
-            </a>
+            </a>*@
         </div>
 
 

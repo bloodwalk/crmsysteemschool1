@@ -112,6 +112,20 @@
     /*border:3px solid red;*/
 }
 
+.mybuttons2 {
+    background-color: #1C6EA4;
+    color: white;
+    padding: 6px 8px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    margin: 4px 2px;
+    cursor: pointer;
+    font-weight: bold;
+    /*border:3px solid red;*/
+}
+
 #logoutbutton {
 
     position:absolute;
@@ -192,10 +206,21 @@ table.bluetable tr:nth-child(even) {
     width: 65%; 
     margin: auto;
 }*/
+#searchbox {
+    margin-bottom:8px;
+    margin-left:12px;
+}
 .notitieinformatie {
     display: block;
     text-align: center;
     font-weight: bold;
+    border-right: 2px solid black;
+    border-left:2px solid black;
+    border-bottom: 2px solid black;
+   
+}
+#notitiedatum {
+    border-top: 2px solid black;
 }
 
 

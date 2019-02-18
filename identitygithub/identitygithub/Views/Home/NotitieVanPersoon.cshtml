@@ -5,27 +5,38 @@
 
         <div class="text-center">
 
-                <hr class="hr">
-                <span class="notitieinformatie">Datum: @Model.Datum.ToShortDateString()</span>
-                <hr class="hr">
-                <span class="notitieinformatie">Onderwerp: @Model.onderwerp</span>
-                <hr class="hr">
+            @*<hr class="hr">*@
+            <span class="notitieinformatie" id="notitiedatum">Datum: @Model.Datum.ToShortDateString()</span>
+            @*<hr class="hr">*@ 
+            <span class="notitieinformatie">Onderwerp: @Model.onderwerp</span>
+                                
+            @*<hr class="hr">*@
 
+            <span class="notitieinformatie">
                 @Model.Textarea;
-
                 <br>
                 <br>
-                <a href='@Url.Action("EditNotities", "Home", new { modelId = Model.Id, gebruikerId = Model.User.Id })'>
+                <input type="button" class="mybuttons2" value="Edit Notitie" onclick="location.href='@Url.Action("EditNotities", "Home",new { modelId = Model.Id, gebruikerId = Model.User.Id })'" />
+            </span>
 
-                    <input type='button' value='Edit Notitie' />
-                </a>
-         
             <br>
             <br>
-            <hr class="hr">
-            <a href='@Url.Action("NotitiesVanPersoonTabel", "Home" , new { id = Model.User.Id })'>
+            
+            @*<a href='@Url.Action("EditNotities", "Home", new { modelId = Model.Id, gebruikerId = Model.User.Id })'>
+
+            <input type='button' value='Edit Notitie' />
+        </a>*@
+
+            <br>
+            <br>
+            @*<hr class="hr">*@
+
+            <input type="button" class="mybuttons2" value="Terug naar NotitieTabel" onclick="location.href='@Url.Action("NotitiesVanPersoonTabel", "Home",new { id = Model.User.Id })'" />
+
+
+            @*<a href='@Url.Action("NotitiesVanPersoonTabel", "Home" , new { id = Model.User.Id })'>
                 <input type='button' value='Terug naar NotitieTabel' />
-            </a>
+            </a>*@
         </div>
 
         

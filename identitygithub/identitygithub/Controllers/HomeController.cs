@@ -95,9 +95,10 @@ namespace PluralsightDemo.Controllers
 
                         return View();
                     }
+                    return View("Success");
                 }
 
-                return View("Success");
+             
             }
 
             return View();

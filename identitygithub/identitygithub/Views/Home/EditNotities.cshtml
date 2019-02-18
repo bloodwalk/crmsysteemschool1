@@ -5,7 +5,7 @@
         <h1 class="text-center">Notitie maken</h1>
 
 
-        
+
 
 
         <form asp-action="EditNotities" method="post" class="form-horizontal">
@@ -25,8 +25,8 @@
             </div>*@
 
 
-            <input type="hidden" asp-for="User.Id"  /> @*moet itct id worden*@
-            <input type="hidden" asp-for="Id"  />
+            <input type="hidden" asp-for="User.Id" /> @*moet itct id worden*@
+            <input type="hidden" asp-for="Id" />
             <div class="form-group">
                 <label asp-for="Textarea" class="col-sm-2"></label>
                 <div class="col-sm-10">
@@ -39,9 +39,11 @@
             <div asp-validation-summary="All"></div>
 
         </form>
-        <a href='@Url.Action("AlleNotities", "Home")'>
+
+        <input type="button" class="mybuttons2" value="Terug naar Notities" onclick="location.href='@Url.Action("AlleNotities", "Home")'" />
+        @*<a href='@Url.Action("AlleNotities", "Home")'>
             <input type='button' value='Terug naar Notities' />
-        </a>
+        </a>*@
 
 
     </div>

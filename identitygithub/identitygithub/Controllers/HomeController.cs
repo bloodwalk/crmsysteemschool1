@@ -97,8 +97,8 @@ namespace PluralsightDemo.Controllers
                     }
                     return View("Success");
                 }
+                // error terug sturen, want user bestaat al
 
-             
             }
 
             return View();
@@ -271,9 +271,10 @@ namespace PluralsightDemo.Controllers
 
                         return View();
                     }
+                    return View("Success");
                 }
 
-                return View("Success");
+               // error terug sturen, want user bestaat al
             }
 
             return View();
